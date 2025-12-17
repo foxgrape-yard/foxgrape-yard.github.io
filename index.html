@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>foxgrape</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'TikTok Sans';
+            src: local('TikTok Sans'), local('TikTokSans');
+            font-weight: 400 900;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink: #FFB7CE;
+            --text-dark: #1a1a1a;
+            --nav-hover: rgba(26, 26, 26, 0.1);
+        }
+
+        body {
+            font-family: 'TikTok Sans', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--pink);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 2rem 3rem;
+            z-index: 100;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .about-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .about-link:hover {
+            background-color: var(--nav-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .headline-container {
+            text-align: center;
+            max-width: 1200px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .headline {
+            font-family: 'TikTok Sans', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 100;
+            font-size: 35px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--text-dark);
+            white-space: nowrap;
+        }
+
+        .fixed-text {
+            display: inline;
+        }
+
+        .rotating-container {
+            display: inline-block;
+            position: relative;
+            vertical-align: baseline;
+            width: 23ch;
+        }
+
+        .rotating-text {
+            position: absolute;
+            left: 0;
+            top: 0;
+            white-space: nowrap;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .headline {
+                font-size: clamp(1.2rem, 3.5vw, 2.5rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .about-link {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .headline {
+                font-size: clamp(0.9rem, 3vw, 1.5rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- <nav> -->
+        <!-- <a href="#" class="about-link">About</a> -->
+    <!-- </nav> -->
+
+    <main>
+        <div class="headline-container">
+            <h1 class="headline">
+                <span class="fixed-text">foxgrape</span> <span class="rotating-container"><span class="rotating-text" id="rotatingText">is not a wine bar</span><span style="visibility: hidden;">is not a tech startup</span></span>
+            </h1>
+        </div>
+    </main>
+
+    <script>
+        const phrases = [
+'is not a wine bar',
+'is not a tech startup',
+'is not a skincare brand',
+'is not a podcast',
+'is not a token',
+'is not a football club',
+'is not a clothing line',
+'is not a museum',
+'is coming soon',
+'is not a record label',
+'is not a coffee roastery',
+'is not a crypto wallet',
+'is not a candle company',
+'is not a furniture brand',
+'is not a charity',
+'is not a music festival',
+'is not a stationery shop',
+'is coming soon',
+'is not an ice cream cart',
+'is not an energy drink',
+'is not a perfume brand',
+'is not a matchmaking service',
+'is not a yoga studio',
+'is not a wedding planning service',
+'is not a handwriting course',
+'is not a weather app',
+'is coming soon',
+'is not a cereal brand',
+'is not a language school',
+'is not a car model',
+'is not a film camera revival project',
+'is not a personalised voice message service',
+'is not a travel agency',
+'is not a plant nursery',
+'is not a car wash',
+'is coming soon',
+'is not a home renovation show',
+'is not an artisan market',
+'is not a flower boutique'
+        ];
+        
+        let currentIndex = 0;
+        const rotatingElement = document.getElementById('rotatingText');
+        let isRotating = false;
+        let rotationInterval;
+        
+        function rotateText(direction = 1) {
+            if (isRotating) return;
+            isRotating = true;
+            
+            // Fade out
+            rotatingElement.style.opacity = '0';
+            rotatingElement.style.transform = 'translateY(-10px)';
+            
+            setTimeout(() => {
+                if (direction > 0) {
+                    currentIndex = (currentIndex + 1) % phrases.length;
+                } else {
+                    currentIndex = (currentIndex - 1 + phrases.length) % phrases.length;
+                }
+                rotatingElement.textContent = phrases[currentIndex];
+                
+                // Fade in from below
+                rotatingElement.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    rotatingElement.style.opacity = '1';
+                    rotatingElement.style.transform = 'translateY(0)';
+                    isRotating = false;
+                }, 50);
+            }, 300);
+        }
+        
+        function startAutoRotation() {
+            if (rotationInterval) {
+                clearInterval(rotationInterval);
+            }
+            rotationInterval = setInterval(() => rotateText(1), 3000);
+        }
+        
+        // Start automatic rotation
+        startAutoRotation();
+        
+        // Rotate on mouse wheel scroll and reset timer
+        window.addEventListener('wheel', (e) => {
+            rotateText(e.deltaY);
+            startAutoRotation(); // Reset the 3-second timer
+        }, { passive: true });
+    </script>
+</body>
+</html>
