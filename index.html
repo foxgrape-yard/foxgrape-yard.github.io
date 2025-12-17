@@ -6,7 +6,7 @@
     <title>foxgrape</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
     <style>
         @font-face {
             font-family: 'TikTok Sans';
@@ -81,7 +81,7 @@
 
         .headline {
             font-family: 'TikTok Sans', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-weight: 100;
+            font-weight: 300;
             font-size: 35px;
             line-height: 1.2;
             letter-spacing: -0.02em;
@@ -97,7 +97,7 @@
             display: inline-block;
             position: relative;
             vertical-align: baseline;
-            width: 23ch;
+            width: 20ch;
         }
 
         .rotating-text {
@@ -133,10 +133,6 @@
             nav {
                 padding: 1.5rem 2rem;
             }
-
-            .headline {
-                font-size: clamp(1.2rem, 3.5vw, 2.5rem);
-            }
         }
 
         @media (max-width: 480px) {
@@ -147,10 +143,6 @@
             .about-link {
                 font-size: 0.85rem;
                 padding: 0.5rem 1rem;
-            }
-
-            .headline {
-                font-size: clamp(0.9rem, 3vw, 1.5rem);
             }
         }
     </style>
@@ -163,7 +155,7 @@
     <main>
         <div class="headline-container">
             <h1 class="headline">
-                <span class="fixed-text">foxgrape</span> <span class="rotating-container"><span class="rotating-text" id="rotatingText">is not a wine bar</span><span style="visibility: hidden;">is not a tech startup</span></span>
+                <span class="fixed-text">foxgrape</span> <span class="rotating-container"><span class="rotating-text" id="rotatingText">is not a wine bar</span><span style="visibility: hidden;">is not a wine bar</span></span>
             </h1>
         </div>
     </main>
@@ -231,6 +223,13 @@
                     currentIndex = (currentIndex - 1 + phrases.length) % phrases.length;
                 }
                 rotatingElement.textContent = phrases[currentIndex];
+                
+                // Make bold if "coming soon"
+                if (phrases[currentIndex] === 'is coming soon') {
+                    rotatingElement.style.fontWeight = '700';
+                } else {
+                    rotatingElement.style.fontWeight = '300';
+                }
                 
                 // Fade in from below
                 rotatingElement.style.transform = 'translateY(10px)';
