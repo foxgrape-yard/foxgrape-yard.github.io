@@ -82,7 +82,7 @@
         .headline {
             font-family: 'TikTok Sans', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
             font-weight: 300;
-            font-size: 35px;
+            font-size: clamp(18px, 5vw, 35px);
             line-height: 1.2;
             letter-spacing: -0.02em;
             color: var(--text-dark);
@@ -97,7 +97,7 @@
             display: inline-block;
             position: relative;
             vertical-align: baseline;
-            width: 20ch;
+            min-width: 15ch;
         }
 
         .rotating-text {
@@ -133,6 +133,14 @@
             nav {
                 padding: 1.5rem 2rem;
             }
+            
+            main {
+                padding: 1.5rem;
+            }
+            
+            .rotating-container {
+                min-width: 13ch;
+            }
         }
 
         @media (max-width: 480px) {
@@ -143,6 +151,24 @@
             .about-link {
                 font-size: 0.85rem;
                 padding: 0.5rem 1rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+            
+            .rotating-container {
+                min-width: 12ch;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .headline {
+                font-size: 16px;
+            }
+            
+            .rotating-container {
+                min-width: 11ch;
             }
         }
     </style>
